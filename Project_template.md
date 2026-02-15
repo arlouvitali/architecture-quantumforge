@@ -141,3 +141,50 @@
 - Добавлен скрипт подмены терминов.
 - Добавлен словарь замен `terms_map.json`.
 - Финальная база не опирается на оригинальные названия и подходит для честной проверки RAG.
+
+## Задание 3. Создание векторного индекса базы знаний
+
+### Выбранная модель эмбеддингов
+- Модель: `sentence-transformers/all-MiniLM-L6-v2`
+- Ссылка: `https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2`
+- Размер эмбеддингов: **384**
+
+### Как выполнена индексация
+1. Источник документов:
+- `knowledge_base/final/` (34 документа).
+
+2. Чанкинг:
+- Использован `RecursiveCharacterTextSplitter`.
+- Параметры: `chunk_size=900`, `chunk_overlap=150`.
+- На каждом чанке сохраняются метаданные:
+  - `source` (путь к файлу),
+  - `title` (имя сущности),
+  - `chunk_id`, `chunk_index`,
+  - `start_char`, `end_char`.
+
+3. Генерация эмбеддингов и сохранение индекса:
+- Скрипт: `scripts/build_index.py`
+- Векторная БД: **FAISS**
+- Результат сохранен в `index/faiss_index/`.
+
+### Артефакты задания 3
+- `index/faiss_index/index.faiss`
+- `index/faiss_index/index.pkl`
+- `index/faiss_index/index_stats.json`
+- `index/faiss_index/sample_query_results.md`
+
+### Результаты запуска
+- Количество документов: **34**
+- Количество чанков: **34**
+- Время генерации индекса: **13.1 сек**
+
+### Примеры запросов к индексу
+Примеры retrieval (запрос + найденные чанки) сохранены в:
+- `index/faiss_index/sample_query_results.md`
+
+Использованные примеры запросов:
+- `Who is Xarn Velgor and what is his role?`
+- `What is Void Core and why was it important?`
+- `What happened during Protocol 66?`
+
+По этим запросам индекс возвращает релевантные чанки из тематических документов (`darth_vader.md`, `death_star.md`, `order_66.md` и др.), что подтверждает корректную работу поиска.

@@ -1,0 +1,5 @@
+langchain==0.3.27
+langchain-community==0.3.31
+langchain-text-splitters==0.3.11
+sentence-transformers==5.1.2
+faiss-cpu==1.13.0
