@@ -1,11 +1,11 @@
 {
   "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
   "embedding_size": 384,
-  "documents_count": 34,
-  "chunks_count": 34,
+  "documents_count": 35,
+  "chunks_count": 35,
   "chunk_size": 900,
   "chunk_overlap": 150,
-  "build_time_seconds": 5.4,
+  "build_time_seconds": 2.18,
   "input_dir": "/Users/vitalyorlov/Work/Yandex/sprint-7-project/architecture-quantumforge/knowledge_base/final",
   "index_dir": "/Users/vitalyorlov/Work/Yandex/sprint-7-project/architecture-quantumforge/index/faiss_index"
 }
